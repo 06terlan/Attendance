@@ -1,0 +1,12 @@
+c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\bin\Debug\Attendance.exe.config
+c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\bin\Debug\Attendance.exe
+c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\bin\Debug\Attendance.pdb
+c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\obj\Debug\Attendance.csprojResolveAssemblyReference.cache
+c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\obj\Debug\Attendance.Form1.resources
+c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\obj\Debug\Attendance.Properties.Resources.resources
+c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\obj\Debug\Attendance.csproj.GenerateResource.Cache
+c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\obj\Debug\Attendance.exe
+c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\obj\Debug\Attendance.pdb
+c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\bin\Debug\SWH.xls
+c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\obj\Debug\Attendance.csproj.ResolveComReference.cache
+c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\bin\Debug\History.txt
