@@ -10,3 +10,19 @@ c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\o
 c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\bin\Debug\SWH.xls
 c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\obj\Debug\Attendance.csproj.ResolveComReference.cache
 c:\users\terlan-pc\documents\visual studio 2015\Projects\Attendance\Attendance\bin\Debug\History.txt
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\bin\Debug\History.txt
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\bin\Debug\SWH.xls
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\bin\Debug\Attendance.exe.config
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\bin\Debug\Attendance.exe
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\bin\Debug\Attendance.pdb
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\obj\Debug\Attendance.csprojAssemblyReference.cache
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\obj\Debug\Attendance.csproj.ResolveComReference.cache
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\obj\Debug\Attendance.Form1.resources
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\obj\Debug\Attendance.Properties.Resources.resources
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\obj\Debug\Attendance.csproj.GenerateResource.cache
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\obj\Debug\Attendance.csproj.CoreCompileInputs.cache
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\obj\Debug\Attendance.exe
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\obj\Debug\Attendance.pdb
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\bin\Debug\EPPlus.dll
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\bin\Debug\EPPlus.xml
+C:\Users\tabdullayev\Desktop\attendace\Attendance\Attendance\obj\Debug\Attendance.csproj.CopyComplete

@@ -11,13 +11,17 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Data.OleDb;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 namespace Attendance
 {
     public partial class Form1 : Form
     {
         IDictionary<int, DateTime[]> dict = new Dictionary<int, DateTime[]>();
-        IDictionary<int, bool> dictChk = new Dictionary<int, bool>();
+        IDictionary<int, string> data = new Dictionary<int, string>();
+        DialogResult isFileSelcted = DialogResult.No;
+
         const string fileName = "";
 
         public Form1()
@@ -27,7 +31,7 @@ namespace Attendance
 
         private void btn_file_Click(object sender, EventArgs e)
         {
-            openFileDialog1.ShowDialog();
+            isFileSelcted = openFileDialog1.ShowDialog();
         }
 
         private void btn_report_Click(object sender, EventArgs e)
@@ -45,7 +49,7 @@ namespace Attendance
             using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
                 connection.Open();
-                OleDbCommand command = new OleDbCommand("select ID from [Sheet1$]", connection);
+                OleDbCommand command = new OleDbCommand("select ID,Name from [Sheet1$]", connection);
                 using (OleDbDataReader dr = command.ExecuteReader())
                 {
                     while (dr.Read())
@@ -55,7 +59,7 @@ namespace Attendance
                         {
                             int row1Col0 = int.Parse(str);
                             dict[row1Col0] = new DateTime[2];
-                            dictChk[row1Col0] = false;
+                            data[row1Col0] = dr[1].ToString();
                         }
                     }
                 }
@@ -65,7 +69,7 @@ namespace Attendance
         private void CreateReport()
         {
             string line;
-            var fileName = string.Format("{0}\\History.txt", Directory.GetCurrentDirectory());
+            var fileName = isFileSelcted == DialogResult.OK ? openFileDialog1.FileName : string.Format("{0}\\History.txt", Directory.GetCurrentDirectory());
 
             System.IO.StreamReader file = new System.IO.StreamReader(fileName);
             while ((line = file.ReadLine()) != null)
@@ -92,7 +96,6 @@ namespace Attendance
                             {
                                 dict[sId][1] = DateTime.Compare(dict[sId][1], new DateTime()) == 0 || DateTime.Compare(dict[sId][1], time) < 0 ? time : dict[sId][1];
                             }
-                            dictChk[sId] = true;
                         }
                     }
                 }
@@ -101,21 +104,45 @@ namespace Attendance
 
         private void writeDataToExcel()
         {
-            var fileName = string.Format("{0}\\SWH.xls", Directory.GetCurrentDirectory());
+            //Open the workbook (or create it if it doesn't exist)
+            var fileName = string.Format("{0}\\SWH_"+(DateTime.Now.ToString("dd.MM.yyyy"))+".xlsx", Directory.GetCurrentDirectory());
 
-            Excel.Workbook MyBook = null;
-            Excel.Application MyApp = null;
-            Excel.Worksheet MySheet = null;
+            using (var p = new ExcelPackage())
+            {
+                var ws = p.Workbook.Worksheets.Add("Sheet1");
 
-            MyApp = new Excel.Application();
-            MyApp.Visible = false;
-            MyBook = MyApp.Workbooks.Open(fileName);
-            MySheet = MyBook.Sheets[1];
-            Excel.Range usedRange = MySheet.UsedRange;
-            int countRows = usedRange.Rows.Count;
+                ws.Cells[1, 1].Value = "Name";
+                ws.Cells[1, 2].Value = "ID";
+                ws.Cells[1, 3].Value = "In";
+                ws.Cells[1, 4].Value = "Out";
+                ws.Cells["A1:D1"].Style.Font.Bold = true;
 
+                int row = 2;
+                foreach (var kvp in dict)
+                {
+                    ws.Cells[row, 1].Value = data[kvp.Key];
+                    ws.Cells[row, 2].Value = kvp.Key;
+                    ws.Cells[row, 3].Value = DateTime.Compare(kvp.Value[0], new DateTime()) == 0 ? "-" : kvp.Value[0].ToString("dd.MM.yyyy H:mm:ss");
+                    ws.Cells[row, 4].Value = DateTime.Compare(kvp.Value[1], new DateTime()) == 0 ? "-" : kvp.Value[1].ToString("dd.MM.yyyy H:mm:ss");
+                    row++;
+                }
 
-            MyApp.Workbooks.Close();
+                //style
+                ws.Cells["A1:D" + row].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                ws.Cells["A1:D" + row].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                ws.Cells["A1:D" + row].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                ws.Cells["A1:D" + row].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                ws.Cells["A1:D" + row].Style.Font.Size = 14;
+                ws.Cells["A1:D" + row].Style.Font.Name = "Calibri";
+
+                ws.Column(1).AutoFit();
+                ws.Column(2).AutoFit();
+                ws.Column(3).AutoFit();
+                ws.Column(4).AutoFit();
+
+                p.SaveAs(new FileInfo(fileName));
+            }
+
         }
     }
 }
