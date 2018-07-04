@@ -56,17 +56,17 @@ namespace Attendance
             using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
                 connection.Open();
-                OleDbCommand command = new OleDbCommand("select ID,Name from [Sheet1$]", connection);
+                OleDbCommand command = new OleDbCommand("select * from [Sheet1$]", connection);
                 using (OleDbDataReader dr = command.ExecuteReader())
                 {
                     while (dr.Read())
                     {
-                        string str = dr[0].ToString().Trim();
+                        string str = dr[1].ToString().Trim();
                         if (str != "")
                         {
                             int row1Col0 = int.Parse(str);
                             dict[row1Col0] = new DateTime[2];
-                            data[row1Col0] = dr[1].ToString();
+                            data[row1Col0] = dr[0].ToString();
 
                             allUsers[row1Col0] = new User(row1Col0);
                         }
