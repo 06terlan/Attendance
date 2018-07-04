@@ -12,29 +12,40 @@ namespace Attendance.Classes
         public int allIns = 0;
         public int id;
         //public List<DateTime> allInOuts;
-        public SortedDictionary<DateTime, string> inOutType;
+        public SortedDictionary<DateTime, List<string>> inOutType;
 
         public User(int id)
         {
             this.id = id;
             //allInOuts = new List<DateTime>();
-            inOutType = new SortedDictionary<DateTime, string>();
+            inOutType = new SortedDictionary<DateTime, List<string>>();
         }
 
         public int entered(DateTime dt)
         {
-            //allInOuts.Add(dt);
-            inOutType[dt] = "in";
+            key(dt);
+            inOutType[dt].Add("in");
 
             return ++allIns;
         }
 
         public int exited(DateTime dt)
         {
-            //allInOuts.Add(dt);
-            inOutType[dt] = "out";
+            key(dt);
+            inOutType[dt].Add("out");
 
             return ++allOuts;
+        }
+
+        private bool key(DateTime dt)
+        {
+
+            if (!inOutType.ContainsKey(dt))
+            {
+                inOutType[dt] = new List<string>();
+            }
+
+            return true;
         }
     }
 }

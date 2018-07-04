@@ -196,21 +196,24 @@ namespace Attendance
                     lastType = "out";
                     foreach (var dd in kvp.Value.inOutType)
                     {
-                        if (dd.Value == "in")
+                        foreach (string type in dd.Value)
                         {
-                            if (lastType == "in")
+                            if (type == "in")
                             {
+                                if (lastType == "in")
+                                {
+                                    endRow++;
+                                }
+                                ws.Cells[endRow, 3].Value = dd.Key.ToString("dd.MM.yyyy H:mm:ss");
+                            }
+                            else if (type == "out")
+                            {
+                                ws.Cells[endRow, 4].Value = dd.Key.ToString("dd.MM.yyyy H:mm:ss");
                                 endRow++;
                             }
-                            ws.Cells[endRow, 3].Value = dd.Key.ToString("dd.MM.yyyy H:mm:ss");
-                        }
-                        else if (dd.Value == "out")
-                        {
-                            ws.Cells[endRow, 4].Value = dd.Key.ToString("dd.MM.yyyy H:mm:ss");
-                            endRow++;
-                        }
 
-                        lastType = dd.Value;
+                            lastType = type;
+                        }
                     }
 
                     if (row != endRow)
